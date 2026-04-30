@@ -213,31 +213,79 @@
     document.body.style.userSelect = '';
   }
 
+  const tarotDeck = [
+    { id: 0, name: '愚者', emoji: '🌟', upright: '新的开始，大胆尝试，财运在冒险中诞生', reversed: '冲动冒进，需三思而行，避免盲目投资' },
+    { id: 1, name: '魔术师', emoji: '🎩', upright: '资源齐备，技能到位，适合主动出击', reversed: '能力被误用，信息不透明，小心陷阱' },
+    { id: 2, name: '女祭司', emoji: '🌙', upright: '直觉敏锐，静观其变，暗中积蓄力量', reversed: '信息不足，判断失误，需更多调研' },
+    { id: 3, name: '皇后', emoji: '👑', upright: '丰收在望，资产增值，稳健持有获利', reversed: '铺张浪费，过度消费，理财需节制' },
+    { id: 4, name: '皇帝', emoji: '🏰', upright: '掌控全局，纪律严明，适合长期布局', reversed: '刚愎自用，缺乏弹性，不可固执己见' },
+    { id: 5, name: '教皇', emoji: '📜', upright: '贵人相助，遵循规则，传统投资获回报', reversed: '被误导，盲从权威，独立思考为上' },
+    { id: 6, name: '恋人', emoji: '💞', upright: '正确选择，合作共赢，互利机会出现', reversed: '分裂犹豫，合作破裂，需谨慎签约' },
+    { id: 7, name: '战车', emoji: '⚔️', upright: '势如破竹，行情强劲，顺势追涨有利', reversed: '失控暴冲，行情逆转，及时止损为上' },
+    { id: 8, name: '力量', emoji: '💪', upright: '以柔克刚，耐心持有，终将克服波动', reversed: '信心不足，被恐慌支配，勿低位割肉' },
+    { id: 9, name: '隐者', emoji: '🏮', upright: '深度思考，价值发现，适合长线布局', reversed: '闭门造车，错失良机，需多交流学习' },
+    { id: 10, name: '命运之轮', emoji: '🎡', upright: '时来运转，趋势有利，抓住转折机遇', reversed: '运势下行，无常变化，做好风险对冲' },
+    { id: 11, name: '正义', emoji: '⚖️', upright: '公平回报，盈亏合理，按规则行事有收获', reversed: '不公待遇，合约纠纷，仔细审查条款' },
+    { id: 12, name: '倒吊人', emoji: '🙃', upright: '以退为进，换个角度看市场，等待黎明', reversed: '挣扎无果，越努力越亏损，需彻底转变' },
+    { id: 13, name: '死神', emoji: '💀', upright: '旧模式终结，清仓重生，迎接新周期', reversed: '抗拒改变，死守亏损仓，该放手就放手' },
+    { id: 14, name: '节制', emoji: '🌊', upright: '平衡配置，分散风险，中庸之道最佳', reversed: '极端操作，仓位失衡，重仓单一品种' },
+    { id: 15, name: '恶魔', emoji: '😈', upright: '贪欲驱动，短线暴利诱惑，警惕杠杆陷阱', reversed: '摆脱束缚，认清骗局，远离非法项目' },
+    { id: 16, name: '高塔', emoji: '⚡', upright: '突发事件，市场暴跌，黑天鹅降临需避险', reversed: '危机延迟，但风险仍在累积，提前减仓' },
+    { id: 17, name: '星星', emoji: '⭐', upright: '希望之光，反弹可期，底部信号初现', reversed: '希望落空，反弹乏力，暂勿抄底' },
+    { id: 18, name: '月亮', emoji: '🌑', upright: '迷雾重重，消息面混乱，多看少动', reversed: '疑心过重，错过真实机会，适当信任直觉' },
+    { id: 19, name: '太阳', emoji: '☀️', upright: '阳光普照，行情大好，丰收时刻已到', reversed: '乐极生悲，过热回调，适时兑现利润' },
+    { id: 20, name: '审判', emoji: '📯', upright: '复盘总结，经验变现，过往积累爆发', reversed: '悔不当初，逃避责任，正视错误才能进步' },
+    { id: 21, name: '世界', emoji: '🌍', upright: '圆满收官，周期顶点，完美止盈离场', reversed: '功亏一篑，最后一跌吞噬利润，及时了结' }
+  ];
+
   fortuneBtn.addEventListener('click', () => {
     if (fortuneBtn.disabled) return;
     fortuneBtn.disabled = true;
-    const dice = document.getElementById('fortune-dice');
-    const result = document.getElementById('fortune-result');
-    dice.classList.add('spinning');
 
-    setTimeout(() => {
-      const roll = Math.floor(Math.random() * 6) + 1;
-      dice.innerHTML = '&#x' + (2679 + roll) + ';';
-      dice.classList.remove('spinning');
+    const slots = ['card-past', 'card-present', 'card-future'];
+    const resultEl = document.getElementById('fortune-result');
+    resultEl.classList.remove('show');
 
-      const fortunes = {
-        1: { title: '大吉大利', desc: '今日财运亨通，投资顺利，适合大胆操作！' },
-        2: { title: '小吉', desc: '运势平稳向好，可以适当参与，但不宜冒进。' },
-        3: { title: '中平', desc: '市场波动较大，建议持币观望，等待时机。' },
-        4: { title: '小凶', desc: '今日不宜重仓，注意风险控制，多看少动。' },
-        5: { title: '凶', desc: '市场有变数，建议减仓避险，保守操作。' },
-        6: { title: '大凶之兆', desc: '黑天鹅预警！建议清仓观望，切勿追涨杀跌！' }
-      };
-      const f = fortunes[roll];
-      result.innerHTML = `<div class="fortune-result-title">${f.title}</div><div class="fortune-result-desc">${f.desc}</div>`;
+    slots.forEach(id => {
+      document.getElementById(id).classList.remove('flipped');
+    });
 
-      fortuneBtn.disabled = false;
-    }, 600);
+    const shuffled = [...tarotDeck].sort(() => Math.random() - 0.5);
+    const drawn = shuffled.slice(0, 3);
+
+    const readings = drawn.map(card => ({
+      ...card,
+      isReversed: Math.random() < 0.5
+    }));
+
+    slots.forEach((slotId, index) => {
+      setTimeout(() => {
+        document.getElementById(slotId).classList.add('flipped');
+        const cardBack = document.getElementById(slotId + '-back');
+        const card = readings[index];
+        cardBack.innerHTML = `<span style="font-size:24px;">${card.emoji}</span><span style="font-size:9px;color:#888;margin-top:2px;">${card.isReversed ? '逆' : '正'}</span>`;
+
+        if (index === 2) {
+          setTimeout(() => {
+            const positions = ['过去', '现在', '未来'];
+            let html = '';
+            readings.forEach((card, i) => {
+              html += `
+              <div class="fortune-card-result">
+                <div class="card-header">
+                  <span class="card-position">${positions[i]}</span>
+                  <span class="card-name">${card.emoji} ${card.name}${card.isReversed ? ' (逆位)' : ' (正位)'}</span>
+                </div>
+                <div class="card-mean">${card.isReversed ? card.reversed : card.upright}</div>
+              </div>`;
+            });
+            resultEl.innerHTML = html;
+            resultEl.classList.add('show');
+            fortuneBtn.disabled = false;
+          }, 400);
+        }
+      }, index * 500);
+    });
   });
 
   requestData('GET_FLASH');

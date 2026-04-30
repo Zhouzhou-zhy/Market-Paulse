@@ -48,10 +48,30 @@
 
       <div class="tab-panel" id="panel-fortune">
         <div class="fortune-container">
-          <div class="fortune-dice-area">
-            <div class="fortune-dice" id="fortune-dice">&#x2680;</div>
+          <div class="fortune-cards-row" id="fortune-cards-row">
+            <div class="fortune-card-slot" id="card-past">
+              <div class="fortune-card-inner">
+                <div class="fortune-card-front">&#x1F0CF;</div>
+                <div class="fortune-card-back" id="card-past-back"></div>
+              </div>
+              <div class="fortune-card-label">过去</div>
+            </div>
+            <div class="fortune-card-slot" id="card-present">
+              <div class="fortune-card-inner">
+                <div class="fortune-card-front">&#x1F0CF;</div>
+                <div class="fortune-card-back" id="card-present-back"></div>
+              </div>
+              <div class="fortune-card-label">现在</div>
+            </div>
+            <div class="fortune-card-slot" id="card-future">
+              <div class="fortune-card-inner">
+                <div class="fortune-card-front">&#x1F0CF;</div>
+                <div class="fortune-card-back" id="card-future-back"></div>
+              </div>
+              <div class="fortune-card-label">未来</div>
+            </div>
           </div>
-          <button class="fortune-btn" id="fortune-btn">掷骰子测运势</button>
+          <button class="fortune-btn" id="fortune-btn">抽三张塔罗牌</button>
           <div class="fortune-result" id="fortune-result"></div>
         </div>
       </div>
