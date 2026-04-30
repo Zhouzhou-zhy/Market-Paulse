@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "金十数据 - 右侧边栏",
+  "version": "1.0.0",
+  "description": "在任意网页右侧显示金十数据实时信息的持久化侧边栏",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://flash-api.jin10.com/*",
+    "https://cdn-rili.jin10.com/*",
+    "https://mcp.jin10.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "sidebar/sidebar.html",
+        "sidebar/sidebar.js",
+        "sidebar/sidebar.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "commands": {
+    "toggle-sidebar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H"
+      },
+      "description": "切换侧边栏显示/隐藏"
+    }
+  },
+  "action": {
+    "default_title": "金十数据侧边栏",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

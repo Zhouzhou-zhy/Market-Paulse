@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div class="sidebar-container">
+
+    <div class="sidebar-topbar">
+      <button class="btn-icon" id="btn-refresh" title="刷新数据">&#x21bb;</button>
+      <span>数据更新时间: <span id="update-time">--:--:--</span></span>
+      <button class="btn-icon" id="btn-toggle" title="隐藏侧边栏">&times;</button>
+    </div>
+
+    <!-- Tabs -->
+    <nav class="sidebar-tabs">
+      <button class="tab-btn active" data-tab="flash">快讯</button>
+      <button class="tab-btn" data-tab="indices">指数</button>
+      <button class="tab-btn" data-tab="commodities">商品</button>
+      <button class="tab-btn" data-tab="fortune">运势</button>
+    </nav>
+
+    <!-- Tab Content -->
+    <div class="sidebar-content">
+
+      <!-- Flash News Tab -->
+      <div class="tab-panel active" id="panel-flash">
+        <div class="flash-list" id="flash-list">
+          <div class="loading">加载中...</div>
+        </div>
+      </div>
+
+      <!-- Indices Tab -->
+      <div class="tab-panel" id="panel-indices">
+        <div class="indices-list" id="indices-list">
+          <div class="loading">加载中...</div>
+        </div>
+      </div>
+
+      <!-- Commodities Tab -->
+      <div class="tab-panel" id="panel-commodities">
+        <div class="commodities-list" id="commodities-list">
+          <div class="loading">加载中...</div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-fortune">
+        <div class="fortune-container">
+          <div class="fortune-dice-area">
+            <div class="fortune-dice" id="fortune-dice">&#x2680;</div>
+          </div>
+          <button class="fortune-btn" id="fortune-btn">掷骰子测运势</button>
+          <div class="fortune-result" id="fortune-result"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="resize-handle" id="resize-handle"></div>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>
