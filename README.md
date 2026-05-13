@@ -163,7 +163,7 @@ background.js
 1. 打开 `edge://extensions/`
 2. 开启"开发人员模式"
 3. 点击"加载解压缩的扩展"
-4. 选择 `C:\Users\27464\Desktop\edge-jin10-plugin` 目录
+4. 选择 `edge-jin10-plugin`所在目录
 5. 重载后按 `Ctrl+Shift+K` 或点击工具栏图标即可开关侧边栏
 
 ## 七、host_permissions 说明
